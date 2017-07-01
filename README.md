@@ -25,7 +25,6 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   ]
 }
 ```
-## 3. go to IAM and create a role
-  * tpye: Amazon EC2 service role.
+## 3. go to IAM and create a Amazon EC2 service role.
   * managed policies: attach the `AWSCodeDeploy` & `CodeDeployDemo-EC2-Permissions` policies
 
