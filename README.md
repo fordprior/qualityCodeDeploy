@@ -102,7 +102,7 @@ hooks:
       timeout: 300
       runas: root
 ```
-  
+## 8. upload your WordPress app to S3  
   
   
   
