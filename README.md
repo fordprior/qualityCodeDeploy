@@ -103,7 +103,8 @@ hooks:
       runas: root
 ```
 ## 8. upload your WordPress app to S3  
-  
+step 3 here: http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-upload-application.html
+
   
   
   
