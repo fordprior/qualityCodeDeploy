@@ -39,4 +39,12 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   * type `sudo yum install git`
   * type `git clone https://github.com/WordPress/WordPress.git /tmp/WordPress`
   * type `cd /` and `ls` to see your app
+
+## 6. write some scripts
+  * `cd` into your `WordPress` directory
+  * type `mkdir scripts`
+  * create 3 files: `> install_dependencies.sh`, `> start_server.sh`, and `> stop_server.sh`
+  
+  
+  
   
