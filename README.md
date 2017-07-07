@@ -45,10 +45,29 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   * type `mkdir scripts`
   * create the following files: http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-configure-content.html
   * type `cat > install_dependencies.sh` and then copy the following:
-```json
+```
+#!/bin/bash
+yum groupinstall -y "Web Server" "MySQL Database" "PHP Support"
+yum install -y php-mysql
 ```
   * create a start server file: `cat > start_server.sh` with these contents:
+```
+#!/bin/bash
+service httpd start
+service mysqld start
+```
   * create a stop server file:  `cat > stop_server.sh` with these contents:
+```
+#!/bin/bash
+isExistApp=`pgrep httpd`
+if [[ -n  $isExistApp ]]; then
+   service httpd stop
+fi
+isExistApp=`pgrep mysqld`
+if [[ -n  $isExistApp ]]; then
+    service mysqld stop
+fi
+```
   * create a change perms file: `cat > change_permissions.sh` with these contents:
   * set all permissions on these scripts: `chmod +x /tmp/WordPress/scripts/*`
   
