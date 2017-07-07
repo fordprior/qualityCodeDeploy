@@ -44,6 +44,8 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   * `cd` into your `WordPress` directory
   * type `mkdir scripts`
   * create 4 files: `> install_dependencies.sh`, `> start_server.sh`, `> stop_server.sh`, and `> change_permissions.sh`
+  * set all permissions on these scripts: `chmod +x /tmp/WordPress/scripts/*`
+  
   
   
   
