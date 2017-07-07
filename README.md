@@ -30,4 +30,13 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   * call it `AWSCodeDeploy-EC2-InstanceProfile`
 
 ## 4. go to EC2 and launch an Linux AMI
-  * on step 3, for IAM Role select the role you created in that you created 
+  * on step 3, for IAM Role select the role you created in that you created
+  * on step 5, create a tag with key "Name" and value "AWSCodeDeploy"
+  * download a `.pem` key and conver it to a `.ppk` using PuTTyGen
+  * launch PuTTy shell and use your `.ppk` to SSH into your instance
+  
+## 5. install your website
+  * type `sudo yum install git`
+  * type `git clone https://github.com/WordPress/WordPress.git /tmp/WordPress`
+  * type `cd /` and `ls` to see your app
+  
