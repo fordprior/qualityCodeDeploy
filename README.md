@@ -44,19 +44,19 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   * `cd` into your `WordPress` directory
   * type `mkdir scripts`
   * create the following files: http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-configure-content.html
-  * type `cat > install_dependencies.sh` and then copy the following:
+  * type `cat > install_dependencies.sh`, copy the following, then hit `Ctrl+C` to finish file creation:
 ```
 #!/bin/bash
 yum groupinstall -y "Web Server" "MySQL Database" "PHP Support"
 yum install -y php-mysql
 ```
-  * create a start server file: `cat > start_server.sh` with these contents:
+  * create a start server file: `cat > start_server.sh`, copy the following, then hit `Ctrl+C` to finish file creation:
 ```
 #!/bin/bash
 service httpd start
 service mysqld start
 ```
-  * create a stop server file:  `cat > stop_server.sh` with these contents:
+  * create a stop server file:  `cat > stop_server.sh`, copy the following, then hit `Ctrl+C` to finish file creation:
 ```
 #!/bin/bash
 isExistApp=`pgrep httpd`
@@ -68,12 +68,16 @@ if [[ -n  $isExistApp ]]; then
     service mysqld stop
 fi
 ```
-  * create a change perms file: `cat > change_permissions.sh` with these contents:
+  * create a change perms file: `cat > change_permissions.sh`, copy the following, then hit `Ctrl+C` to finish file creation:
+```
+#!/bin/bash
+chmod -R 755 /var/www/html/WordPress
+```
   * set all permissions on these scripts: `chmod +x /tmp/WordPress/scripts/*`
   
 ## 7. create an appspec.yml file for CodeDeploy
   * `cd ..` back out to the `/WordPress` directory
-  * type `cat > appspec.yml` and then copy the following:
+  * type `cat > appspec.yml`, copy the following, then hit `Ctrl+C` to finish file creation:
 ```
 version: 0.0
 os: linux
