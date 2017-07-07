@@ -43,8 +43,42 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
 ## 6. write some scripts
   * `cd` into your `WordPress` directory
   * type `mkdir scripts`
-  * create 4 files: `> install_dependencies.sh`, `> start_server.sh`, `> stop_server.sh`, and `> change_permissions.sh`
+  * create the following files: http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-configure-content.html
+  * type `cat > install_dependencies.sh` and then copy the following:
+```json
+```
+  * create a start server file: `cat > start_server.sh` with these contents:
+  * create a stop server file:  `cat > stop_server.sh` with these contents:
+  * create a change perms file: `cat > change_permissions.sh` with these contents:
   * set all permissions on these scripts: `chmod +x /tmp/WordPress/scripts/*`
+  
+## 7. create an appspec.yml file for CodeDeploy
+  * `cd ..` back out to the `/WordPress` directory
+  * type `cat > appspec.yml` and then copy the following:
+```
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/WordPress
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/change_permissions.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
+```
   
   
   
