@@ -28,6 +28,24 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
 ## 3. go to IAM and create a Amazon EC2 service role.
   * managed policies: attach the `AWSCodeDeploy-EC2-Permissions` policy
   * call it `AWSCodeDeploy-EC2-InstanceProfile`
+  * edit the Trust relationships as follows:
+  ```
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": [
+          "ec2.amazonaws.com",
+          "codedeploy.amazonaws.com"
+        ]
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+  ```
 
 ## 4. go to EC2 and launch an Linux AMI
   * on step 3, for IAM Role select the role you created in that you created
@@ -102,9 +120,58 @@ hooks:
       timeout: 300
       runas: root
 ```
-## 8. upload your WordPress app to S3  
-step 3 here: http://docs.aws.amazon.com/codedeploy/latest/userguide/tutorials-wordpress-upload-application.html
 
-  
-  
+## 8. install aws cli
+  * configure w/ secret keys from your Security Credentials section
+
+## 9. upload your WordPress app to S3  
+  * create bucket with name codedemoydeploybucket-fordprior and public read permissions
+  * add a bucket policy as follows:
+```
+{
+  "Statement": [
+    {
+      "Action": ["s3:PutObject", "s3:Get*", "s3:List*"],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::codedeploydemobucket-fordprior/*",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::1234567890:role/AWSCodeDeploy-EC2-InstanceProfile"
+        ]
+      }
+    }
+  ]
+}
+```
+
+## 10. push the app to s3
+  * navigate to /tmp/WordPress directory and type `aws deploy create-application --application-name wordpress-app-fordprior`
+  * type the following:
+```
+aws deploy push \
+  --application-name wordpress-app-fordprior \
+  --s3-location s3://codedeploydemobucket-fordprior/wordpress-app-fordprior.zip \
+  --ignore-hidden-file
+```
+
+## 11. deploy the app
+ * get the service role ARN by typing `aws iam get-role --role-name AWSCodeDeploy-EC2-InstanceProfile --query "Role.Arn" --output text`
+ * type this:
+ ```
+ aws deploy create-deployment-group \
+  --application-name wordpress-app-fordprior \
+  --deployment-group-name wordpress-deployment-group-fordprior \
+  --deployment-config-name CodeDeployDefault.OneAtATime \
+  --ec2-tag-filters Key=Name,Value=CodeDeployDemo,Type=KEY_AND_VALUE \
+  --service-role-arn arn:aws:iam::1234567890:role/AWSCodeDeploy-EC2-InstanceProfile
+ ```
+ * now deploy, as follows!
+ ```
+ aws deploy create-deployment \
+  --application-name wordpress-app-fordprior \
+  --deployment-config-name CodeDeployDefault.OneAtATime \
+  --deployment-group-name wordpress-deployment-group-fordprior \
+  --s3-location bucket=codedeploydemobucket-fordprior,bundleType=zip,key=wordpress-app-fordprior.zip
+ ```
+
   
