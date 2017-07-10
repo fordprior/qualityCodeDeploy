@@ -37,8 +37,7 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
       "Effect": "Allow",
       "Principal": {
         "Service": [
-          "ec2.amazonaws.com",
-          "codedeploy.amazonaws.com"
+          "ec2.amazonaws.com"
         ]
       },
       "Action": "sts:AssumeRole"
@@ -46,7 +45,11 @@ Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, 
   ]
 }
   ```
-
+  
+## 4. go to IAM and create a Amazon CodeDeploy service role
+  * managed policies: attach the `AWSCodeDeploy` policy
+  * call it `AWSCodeDeployDemo`
+  
 ## 4. go to EC2 and launch an Linux AMI
   * on step 3, for IAM Role select the role you created in that you created
   * on step 5, create a tag with key "Name" and value "AWSCodeDeploy"
@@ -123,6 +126,7 @@ hooks:
 
 ## 8. install aws cli
   * configure w/ secret keys from your Security Credentials section
+  * install codedeployagent (http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html#codedeploy-agent-operations-install-linux)
 
 ## 9. upload your WordPress app to S3  
   * create bucket with name codedemoydeploybucket-fordprior and public read permissions
