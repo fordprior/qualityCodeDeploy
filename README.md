@@ -140,7 +140,8 @@ hooks:
   Default output format [None]: json
   ```
   * install codedeployagent with these commands:
-  ```wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
+  ```
+  wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
   chmod +x ./install
   sudo ./install auto
   ```
