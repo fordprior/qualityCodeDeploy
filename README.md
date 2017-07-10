@@ -124,10 +124,26 @@ hooks:
       runas: root
 ```
 
-## 8. install aws cli
-  * configure w/ secret keys from your Security Credentials section
-  * install codedeployagent (http://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install.html#codedeploy-agent-operations-install-linux)
-
+## 8. install aws cli & codedeployagent
+  * commands are as follows:
+  ```
+  curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+  python get-pip.py --user
+  pip install awscli --user
+  ```
+  * now, configure it with these commands (the access keys can be generated on the console's Security Credentials page):
+  ```
+  aws configure
+  AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
+  AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+  Default region name [None]: us-east-1
+  Default output format [None]: json
+  ```
+  * install codedeployagent with these commands:
+  ```wget https://aws-codedeploy-us-east-1.s3.amazonaws.com/latest/install
+  chmod +x ./install
+  sudo ./install auto
+  ```
 ## 9. upload your WordPress app to S3  
   * create bucket with name codedemoydeploybucket-fordprior and public read permissions
   * add a bucket policy as follows:
@@ -167,7 +183,7 @@ aws deploy push \
   --deployment-group-name wordpress-deployment-group-fordprior \
   --deployment-config-name CodeDeployDefault.OneAtATime \
   --ec2-tag-filters Key=Name,Value=CodeDeployDemo,Type=KEY_AND_VALUE \
-  --service-role-arn arn:aws:iam::1234567890:role/AWSCodeDeploy-EC2-InstanceProfile
+  --service-role-arn arn:aws:iam::1234567890:role/AWSCodeDeploy
  ```
  * now deploy, as follows!
  ```
