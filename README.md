@@ -176,7 +176,7 @@ aws deploy push \
 ```
 
 ## 11. deploy the app
- * get the service role ARN by typing `aws iam get-role --role-name AWSCodeDeploy-EC2-InstanceProfile --query "Role.Arn" --output text`
+ * get the service role ARN by typing `aws iam get-role --role-name AWSCodeDeploy --query "Role.Arn" --output text`
  * type this:
  ```
  aws deploy create-deployment-group \
