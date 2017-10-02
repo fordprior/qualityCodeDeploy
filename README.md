@@ -196,4 +196,11 @@ aws deploy push \
  ```
 * for fun, open a browser and plug in the Public DNS from your running EC2 instance
       * Q - Can you just use localhost?
-  
+
+  ## TODO:
+- [x] get pipeline working
+- [ ] integrate w/ GitHub
+- [ ] make web page available via linux AMI's Public DNS
+- [ ] configure WordPress using above Public DNS (just hit the site and log in)
+- [ ] add RSpec/Cucumber framework w/ script to run a basic assertion site build on localhost
+- [ ] integrate this w/ CircleCI. Docs [here](https://circleci.com/docs/1.0/browser-debugging/)!
