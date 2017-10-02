@@ -195,4 +195,10 @@ aws deploy push \
   --s3-location bucket=codedeploydemobucket-fordprior,bundleType=zip,key=wordpress-app-fordprior.zip
  ```
 
-  
+  ## TODO:
+- [x] get pipeline working
+- [ ] integrate w/ GitHub
+- [ ] make web page available via linux AMI's Public DNS
+- [ ] configure WordPress using above Public DNS (just hit the site and log in)
+- [ ] add RSpec/Cucumber framework w/ script to run a basic assertion site build on localhost
+- [ ] integrate this w/ CircleCI. Docs [here](https://circleci.com/docs/1.0/browser-debugging/)!
