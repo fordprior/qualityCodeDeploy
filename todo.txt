@@ -1,0 +1,21 @@
+TODO Items
+Create necessary resources in Cloudformation
+  - Parameters:
+    - SSH Key
+      - Type String
+
+  -Reosurces:
+    - IAM AWSCodeDeploy-EC2-Permissions
+    - IAM Service Role AWSCodeDeploy-EC2-InstanceProfile
+      - Trust realtionship should allow ec2 to assume
+    - AWSCodeDeployDemo
+      - Manage policies 'AWSCodeDeploy'
+    - EC2 Instance
+      - IAM Role ref AWSCodeDeploy-EC2-InstanceProfile
+      - Tag Name => AWSCodeDeploy
+      - ssh key ref SSH key
+      - CFN Init todo:
+        - clone qualitycodeDeploy repo
+        - Build and run Docker file
+      s3 bucket
+        - Bucket Policy
