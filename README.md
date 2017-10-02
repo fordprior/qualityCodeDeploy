@@ -194,5 +194,6 @@ aws deploy push \
   --deployment-group-name wordpress-deployment-group-fordprior \
   --s3-location bucket=codedeploydemobucket-fordprior,bundleType=zip,key=wordpress-app-fordprior.zip
  ```
-
+* for fun, open a browser and plug in the Public DNS from your running EC2 instance
+      * Q - Can you just use localhost?
   
