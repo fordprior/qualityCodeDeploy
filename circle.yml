@@ -10,3 +10,6 @@ test:
   post:
     - docker run -t postman/newman_alpine33 -p 3000:3000  --url="https://www.getpostman.com/collections/17e59e33e2446cf09193"
     - curl --retry 10 --retry-delay 5 localhost:8080 | grep "Hello World!"
+notify:
+  webhooks:
+    - url: $JENKINS/job/$PROJECT/build?token=$TOKEN
