@@ -9,3 +9,4 @@ dependencies:
 test:
   post:
     - docker run -p 3000:3000 --name newman $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/newman:$CIRCLE_SHA1 --url="$COLLECTION_URL"
+    - docker run -p 3000:3000 --name newman $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/newman:$CIRCLE_SHA1 --collection="prod-check.postman_collection.json" --html "newman_report.html"
