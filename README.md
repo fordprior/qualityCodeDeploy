@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/fordprior/qualityCodeDeploy.svg?style=svg)](https://circleci.com/gh/fordprior/qualityCodeDeploy)
 # qualityCodeDeploy
 Steps for setting up a QA-friendly CI pipeline using GitHub, CircleCI, and AWS, where you can push a commit to a web app and run automated tests on it.
 
