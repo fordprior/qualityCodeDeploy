@@ -1,0 +1,106 @@
+{
+	"variables": [],
+	"info": {
+		"name": "prod-check",
+		"_postman_id": "a65f69ad-2e9d-c3f6-546f-250425479463",
+		"description": "No POSTS, just GETS.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ssoauthentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//parsing response into JSON\r",
+							"var response = JSON.parse(responseBody);\r",
+							"postman.setGlobalVariable(\"auth\", response.jwt);\r",
+							"\r",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": {
+						"username": "pmgotesting89@gmail.com",
+						"password": "testing1",
+						"saveHelperData": true,
+						"showPassword": false
+					}
+				},
+				"url": "https://go.snagajob.com/api/Authentication/token/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cG1nb3Rlc3Rpbmc4OUBnbWFpbC5jb206dGVzdGluZzE=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "/users?CustomerId={id}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"//parsing response into JSON\r",
+							"var response = JSON.parse(responseBody);\r",
+							"\r",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "https://go.snagajob.com/api/customers/736701",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{auth}}",
+						"description": ""
+					},
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Email\": \"{{email}}\",\r\n  \"Password\": \"testing1\"\r\n}"
+				},
+				"description": "grab customer's users in collection"
+			},
+			"response": []
+		}
+	]
+}
