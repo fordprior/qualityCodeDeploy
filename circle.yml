@@ -4,7 +4,7 @@ machine:
 
 dependencies:
   post:
-    - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/sample-webapp .
+    - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com .
 
 test:
   post:
