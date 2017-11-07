@@ -166,7 +166,7 @@ hooks:
 }
 ```
 
-## 10. push the app to s3
+## 10. push the app to s3!
   * navigate to /tmp/WordPress directory and type `aws deploy create-application --application-name wordpress-app-fordprior`
   * type the following:
 ```
