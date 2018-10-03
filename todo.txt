@@ -19,3 +19,7 @@ Create necessary resources in Cloudformation
         - Build and run Docker file
       s3 bucket
         - Bucket Policy
+        
+Integrate with:
+  - Gitlab
+  - Bitbucket
